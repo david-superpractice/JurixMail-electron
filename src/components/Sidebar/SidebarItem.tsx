@@ -6,13 +6,21 @@ interface SidebarItemProps {
   count?: number;
   description?: string;
   isActive?: boolean;
+  onClick?: () => void;
 }
 
-export function SidebarItem({ icon, label, count, description, isActive = false }: SidebarItemProps) {
+export function SidebarItem({ 
+  icon, 
+  label, 
+  count, 
+  description, 
+  isActive = false,
+  onClick 
+}: SidebarItemProps) {
   return (
-    <a
-      href="#"
-      className={`flex items-center px-3 py-2 text-sm font-medium rounded-md group ${
+    <button
+      onClick={onClick}
+      className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md group ${
         isActive 
           ? 'bg-blue-50 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300' 
           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800'
@@ -25,7 +33,7 @@ export function SidebarItem({ icon, label, count, description, isActive = false 
       }`}>
         {icon}
       </div>
-      <div className="flex-1">
+      <div className="flex-1 text-left">
         <div className="flex items-center justify-between">
           <span>{label}</span>
           {count !== undefined && (
@@ -42,6 +50,6 @@ export function SidebarItem({ icon, label, count, description, isActive = false 
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{description}</p>
         )}
       </div>
-    </a>
+    </button>
   );
 }
